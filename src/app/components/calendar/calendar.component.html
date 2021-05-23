@@ -1,0 +1,16 @@
+<table>
+  <thead>
+  <tr>
+    <th colspan="12">Current Month</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td *ngFor="let month of calendar">
+      <span (click)="changeMonth(month.num)" [ngClass]="{'active': month.isActive}">
+        {{ month.name }}
+      </span>
+    </td>
+  </tr>
+  </tbody>
+</table>

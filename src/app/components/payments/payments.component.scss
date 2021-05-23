@@ -1,0 +1,17 @@
+.card {
+  border: 1px solid #000;
+  box-shadow: 1px 5px 3px 1px rgba(0,0,0, 0.4);
+  padding: 15px;
+  margin: 10px 20px;
+  min-height: 200px;
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 120px;
+      text-align: center;
+    }
+  }
+}
