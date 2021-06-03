@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DateService} from "../../shared/services/date.service";
+import {DateService} from "../../services/date.service";
 import * as moment from "moment";
 
 export interface MonthCalendar {
