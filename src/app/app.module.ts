@@ -11,6 +11,7 @@ import { MomentPipe } from './shared/pipes/moment.pipe';
 import { PaymentsComponent } from './core/components/payments/payments.component';
 import { OtherPaymentsComponent } from './core/components/other-payments/other-payments.component';
 import { SummaryComponent } from './core/components/summary/summary.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { SummaryComponent } from './core/components/summary/summary.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

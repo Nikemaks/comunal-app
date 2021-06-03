@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {RegularPayments} from "../../../shared/interfaces/payments";
+import {PaymentsService} from "../../services/payments.service";
 
 export const regularPayments = ['Вода', 'Свет', 'Газ'];
 
@@ -11,10 +13,15 @@ export class ComunalComponent implements OnInit {
 
   regularPayments = regularPayments;
 
-  constructor() {
+  constructor(private paymentService: PaymentsService) {
   }
 
   ngOnInit(): void {
+  }
+
+  addPayments(payments: RegularPayments) {
+    this.paymentService.setRegularPayments(payments);
+    console.log(this.paymentService.getAllPayments());
   }
 
 }

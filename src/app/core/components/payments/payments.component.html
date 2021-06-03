@@ -1,15 +1,17 @@
-<div class="card">
-  <h2>{{ namePayments }}</h2>
-  <div class="form-group">
-    <label for="">Показания</label>
-    <input type="number" value="0">
+<form action="" [formGroup]="formGroup">
+  <div class="card">
+    <h2>{{ this.formGroup.controls['name'].value }}</h2>
+    <div class="form-group">
+      <label for="">Показания</label>
+      <input formControlName="indications" type="number" value="0">
+    </div>
+    <div class="form-group">
+      <label for="">Цена за еденицу</label>
+      <input formControlName="priceForOne" type="number" value="0">
+    </div>
+    <div class="form-group">
+      <label for="">Цена за '{{ this.formGroup.controls['name'].value }}'</label>
+      <input formControlName="price" type="number" value="0">
+    </div>
   </div>
-  <div class="form-group">
-    <label for="">Цена за еденицу</label>
-    <input type="number" value="0">
-  </div>
-  <div class="form-group">
-    <label for="">Цена за '{{namePayments}}'</label>
-    <input type="number" value="0">
-  </div>
-</div>
+</form>

@@ -2,12 +2,11 @@
   <div *ngFor="let item of regularPayments">
     <app-payments
       [namePayments]="item"
+      (payments)="addPayments($event)"
     ></app-payments>
   </div>
   <app-other-payments></app-other-payments>
 </div>
-<div class="summary">
-  <app-summary></app-summary>
-</div>
+<app-summary class="summary"></app-summary>
 
 
