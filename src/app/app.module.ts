@@ -12,6 +12,7 @@ import { PaymentsComponent } from './core/components/payments/payments.component
 import { OtherPaymentsComponent } from './core/components/other-payments/other-payments.component';
 import { SummaryComponent } from './core/components/summary/summary.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AllPricePipe } from './shared/pipes/all-price.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MomentPipe,
     PaymentsComponent,
     OtherPaymentsComponent,
-    SummaryComponent
+    SummaryComponent,
+    AllPricePipe
   ],
   imports: [
     BrowserModule,

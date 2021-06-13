@@ -1,7 +1,12 @@
-<div class="card">
-  <h2>Другие платежи</h2>
-  <div class="form-group">
-    <label for="">Сумма</label>
-    <input type="number" value="0">
+<form action="" [formGroup]=formGroup>
+  <div class="card">
+    <h2>Другие платежи</h2>
+    <div class="form-group">
+      <label for="count">Сумма</label>
+      <input id="count"
+             type="number"
+             formControlName="count">
+    </div>
   </div>
-</div>
+</form>
+

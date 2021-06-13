@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {OtherPayments, PaymentsEnum} from "../../../shared/interfaces/payments";
 
 @Component({
   selector: 'app-other-payments',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherPaymentsComponent implements OnInit {
 
-  constructor() { }
+  @Output() addOtherPayments: EventEmitter<OtherPayments> = new EventEmitter<OtherPayments>();
+  constructor() {
+  }
+
+  formGroup: FormGroup = new FormGroup({
+    name: new FormControl(PaymentsEnum.OTHER_PAYMENTS, Validators.required),
+    count: new FormControl('', Validators.required)
+  });
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  initForm() {
+    this.formGroup.statusChanges.subscribe(() => {
+      if (this.formGroup.valid) {
+        this.addOtherPayments.emit(this.formGroup.value);
+      }
+    })
   }
 
 }

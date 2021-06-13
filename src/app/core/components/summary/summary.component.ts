@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PaymentsService} from "../../services/payments.service";
 
 @Component({
   selector: 'app-summary',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor() { }
+  $allPayments = this.paymentsService.$allPayments;
+
+  constructor(private paymentsService: PaymentsService) {
+  }
 
   ngOnInit(): void {
   }
 
+  save() {
+    console.log(this.paymentsService.getAllPaymentsPrice());
+  }
 }

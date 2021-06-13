@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegularPayments} from "../../../shared/interfaces/payments";
 
 @Component({
@@ -13,10 +13,10 @@ export class PaymentsComponent implements OnInit {
   @Output() payments: EventEmitter<RegularPayments> = new EventEmitter<RegularPayments>();
 
   formGroup: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    indications: new FormControl('0'),
-    priceForOne: new FormControl('0'),
-    price: new FormControl('0')
+    name: new FormControl('', Validators.required),
+    indications: new FormControl('', Validators.required),
+    priceForOne: new FormControl('', Validators.required),
+    count: new FormControl('', Validators.required)
   });
 
   constructor() {
@@ -31,8 +31,10 @@ export class PaymentsComponent implements OnInit {
       name: this.namePayments
     });
 
-    this.formGroup.valueChanges.subscribe(value => {
-      this.payments.emit(value);
+    this.formGroup.statusChanges.subscribe(() => {
+      if (this.formGroup.valid) {
+        this.payments.emit(this.formGroup.value);
+      }
     })
   }
 

@@ -5,7 +5,9 @@
       (payments)="addPayments($event)"
     ></app-payments>
   </div>
-  <app-other-payments></app-other-payments>
+  <app-other-payments
+    (addOtherPayments)="addOtherPayments($event)"
+  ></app-other-payments>
 </div>
 <app-summary class="summary"></app-summary>
 

@@ -1,2 +1,2 @@
-<button class="btn btn-save">Save</button>
-<p>Общая сумма: 2313</p>
+<button (click)="save()" class="btn btn-save">Save</button>
+<p>{{ $allPayments | async | allPrice |  currency:"UAH ":'symbol' }}</p>
