@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {OtherPayments, PaymentsEnum, RegularPayments} from "../../../shared/interfaces/payments";
+import {OtherPayments, PaymentsEnum} from "../../../shared/interfaces/payments";
 import {PaymentsService} from "../../services/payments.service";
+import {RegularPayments} from "../../../shared/interfaces/regular-payments";
 
-export const regularPayments = ['Вода', 'Свет', 'Газ'];
+export const regularPayments = [PaymentsEnum.WATTER, PaymentsEnum.LIGTH, PaymentsEnum.GAS];
 
 @Component({
   selector: 'app-comunal',

@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {RegularPayments} from "../../../shared/interfaces/payments";
-import {debounce} from "rxjs/operators";
-import {interval} from "rxjs";
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
+import {RegularPayments, RegularPaymentsData} from "../../../shared/interfaces/regular-payments";
 
 @Component({
   selector: 'app-payments',
@@ -18,7 +17,7 @@ export class PaymentsComponent implements OnInit {
     name: new FormControl('', Validators.required),
     indications: new FormControl('', Validators.required),
     priceForOne: new FormControl('', Validators.required),
-    count: new FormControl('', Validators.required),
+    count: new FormControl('', [Validators.required, Validators.nullValidator]),
     wasIndications: new FormControl('', Validators.required),
     nowIndications: new FormControl('', Validators.required)
   });
@@ -35,24 +34,23 @@ export class PaymentsComponent implements OnInit {
       name: this.namePayments
     });
 
-    this.formGroup.statusChanges.subscribe(() => {
-      if (this.formGroup.valid) {
-        this.payments.emit(this.formGroup.value);
-      }
-    });
-
     this.formGroup.valueChanges
       .pipe(
-        debounce(() => interval(500))
+        debounceTime(400),
+        distinctUntilChanged()
       )
       .subscribe(value => {
         if (value.wasIndications && value.nowIndications) {
           const indications = value.nowIndications - value.wasIndications;
-          this.formGroup.controls['indications'].setValue(indications);
+          this.formGroup.controls['indications'].patchValue(indications, {emitEvent: false});
         }
         if (value.indications && value.priceForOne) {
           const count = +value.indications * +value.priceForOne;
-          this.formGroup.controls['count'].setValue(count);
+          this.formGroup.controls['count'].patchValue(count.toFixed(2), {emitEvent: false});
+        }
+        if (this.formGroup.valid) {
+          const regularPayments = new RegularPaymentsData(this.formGroup.value);
+          this.payments.emit(regularPayments);
         }
       });
   }

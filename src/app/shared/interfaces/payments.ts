@@ -1,11 +1,7 @@
 export interface SimplePayments {
+  type: TypePayments
   name: string;
   count: number;
-}
-
-export interface RegularPayments extends SimplePayments {
-  indications: number;
-  priceForOne: number;
 }
 
 export interface OtherPayments extends SimplePayments {
@@ -16,4 +12,9 @@ export enum PaymentsEnum {
   LIGTH = 'Свет',
   GAS = 'Газ',
   OTHER_PAYMENTS = 'Другие Платежи'
+}
+
+export enum TypePayments {
+  regular = 'regularPayments',
+  other = 'otherPayments'
 }

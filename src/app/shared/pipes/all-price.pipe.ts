@@ -10,7 +10,7 @@ export class AllPricePipe implements PipeTransform {
      if(!value) return 0;
 
       return value.reduce((acc, curr) => {
-        acc += curr.count;
+        acc += +curr.count;
 
         return acc;
       }, 0);
