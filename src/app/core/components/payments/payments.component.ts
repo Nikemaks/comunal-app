@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegularPayments} from "../../../shared/interfaces/payments";
+import {debounce} from "rxjs/operators";
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-payments',
@@ -16,7 +18,9 @@ export class PaymentsComponent implements OnInit {
     name: new FormControl('', Validators.required),
     indications: new FormControl('', Validators.required),
     priceForOne: new FormControl('', Validators.required),
-    count: new FormControl('', Validators.required)
+    count: new FormControl('', Validators.required),
+    wasIndications: new FormControl('', Validators.required),
+    nowIndications: new FormControl('', Validators.required)
   });
 
   constructor() {
@@ -35,7 +39,22 @@ export class PaymentsComponent implements OnInit {
       if (this.formGroup.valid) {
         this.payments.emit(this.formGroup.value);
       }
-    })
+    });
+
+    this.formGroup.valueChanges
+      .pipe(
+        debounce(() => interval(500))
+      )
+      .subscribe(value => {
+        if (value.wasIndications && value.nowIndications) {
+          const indications = value.nowIndications - value.wasIndications;
+          this.formGroup.controls['indications'].setValue(indications);
+        }
+        if (value.indications && value.priceForOne) {
+          const count = +value.indications * +value.priceForOne;
+          this.formGroup.controls['count'].setValue(count);
+        }
+      });
   }
 
 }

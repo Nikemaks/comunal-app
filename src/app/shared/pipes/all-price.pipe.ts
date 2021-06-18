@@ -6,7 +6,7 @@ import {SimplePayments} from "../interfaces/payments";
 })
 export class AllPricePipe implements PipeTransform {
 
-  transform(value: SimplePayments[] | null) {debugger
+  transform(value: SimplePayments[] | null) {
      if(!value) return 0;
 
       return value.reduce((acc, curr) => {
